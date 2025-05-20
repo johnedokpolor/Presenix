@@ -6,7 +6,7 @@ const Page = () => {
   useEffect(() => {
     redirect("/api/auth/login?post_login_redirect_url=/dashboard");
   }, []);
-  return <div></div>;
+  return <div>Hello</div>;
 };
 
 export default Page;
