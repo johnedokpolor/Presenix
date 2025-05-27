@@ -12,7 +12,7 @@ const Dashboard = () => {
   useEffect(() => {
     // sets the theme to dark or light based on the state
     dark ? setTheme("dark") : setTheme("light");
-  }, [dark]);
+  }, [setTheme, dark]);
   return (
     <div>
       <p className="">Dashboard</p>
