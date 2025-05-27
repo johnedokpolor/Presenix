@@ -144,5 +144,5 @@ export const Logout = async (req, res) => {
     sameSite: "none", // Same attribute as when the cookie was set
     path: "/", // Specify the same path used for the cookie
   });
-  res.status(200).json({ success: true, message: "Logged out successfully" });
+  res.status(200).json({ success: true, message: "Logmged out successfully" });
 };
