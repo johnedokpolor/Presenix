@@ -10,16 +10,19 @@ const Dashboard = () => {
   const [dark, setdark] = useState(false);
 
   useEffect(() => {
-    // sets the theme to dark or light based on the state
-    dark ? setTheme("dark") : setTheme("light");
-  }, [setTheme]);
+    if (dark) {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  }, [setTheme, dark]);
   return (
     <div>
       <p className="">Dashboard</p>
       <Button onClick={() => setdark(!dark)} className="bg-blue-500 text-white">
         {dark ? "Light Mode" : "Dark Mode"}
       </Button>
-      <LogoutLink>Lo kkg out</LogoutLink>
+      <LogoutLink>Logout</LogoutLink>
     </div>
   );
 };
