@@ -14,7 +14,7 @@ const router = express.Router();
 router.post("/register", Register);
 router.post("/login", Login);
 router.get("/check-email", CheckEmail);
-router.get("/check-matricNo", CheckMatricNo);
+router.get("/check-matric-number", CheckMatricNo);
 router.post("/logout", protect, Logout);
 
 export default router;

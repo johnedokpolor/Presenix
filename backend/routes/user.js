@@ -3,6 +3,7 @@ import {
   GetAllUsers,
   GenerateAttendanceLink,
   GetAttendanceLinks,
+  DeleteUser,
 } from "../controllers/user/lecturer.js";
 import { MarkAttendance } from "../controllers/user/user.js";
 import { protect } from "../middlewares/auth.js";
@@ -15,6 +16,7 @@ router
   .route("/attendancelinks")
   .get(protect, GetAttendanceLinks)
   .post(protect, GenerateAttendanceLink);
+router.delete("/:id", DeleteUser);
 
 // All User Routes
 router.get("/mark-attendance", protect, MarkAttendance);

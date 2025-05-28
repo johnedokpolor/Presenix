@@ -63,6 +63,34 @@ export const GenerateAttendanceLink = async (req, res) => {
       )}/attendance/${token}`,
     });
   } catch (error) {
-    throw new Error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+// @desc   Delete a user
+// @route  DELETE /api/users/:id
+export const DeleteUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findByIdAndDelete(id).select("-password");
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+    res.status(200).json({
+      success: true,
+      message: "User deleted successfully",
+      user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };

@@ -7,14 +7,14 @@ import { generateTokenAndSetCookie } from "../utils/generateTokenAndSetCookie.js
 export const Register = async (req, res) => {
   try {
     //   Checks For All Input Fields
-    const { email, name, password, matricNumber, lecturerToken } = req.body;
+    const { name, email, password, matricNumber, lecturerToken } = req.body;
     if (!email || !name || !password) {
       return res
         .status(400)
         .json({ success: false, message: "All Fields are Required" });
     }
 
-    // Check if User Exists
+    // Check if User Already Exists
     const emailAlreadyExists = await User.findOne({ email });
     const matricNoAlreadyExists = await User.findOne({ matricNumber });
     if (emailAlreadyExists) {
@@ -38,15 +38,17 @@ export const Register = async (req, res) => {
 
     //Creates a User Object Using the User Model
     const user = new User({
-      email,
       password: hashedPassword,
       name,
       role,
     });
 
-    if (matricNumber != null) {
-      user.matricNumber = matricNumber;
+    if (email) {
+      user.email = email;
+    }
+    if (matricNumber) {
       user.attendanceNo = 0;
+      user.matricNumber = matricNumber;
     }
 
     //Generates jsonwebtoken
@@ -148,11 +150,11 @@ export const CheckEmail = async (req, res) => {
   res.status(200).json({ success: true, message: "Email was found" });
 };
 // @desc   Check if matric number exists
-// @route  GET /api/auth/check-matricno
+// @route  GET /api/auth/check-matric-number
 export const CheckMatricNo = async (req, res) => {
-  const { matricNo } = req.body;
+  const { matricNumber } = req.body;
   // Check if matric number is vaiid
-  const user = await User.findOne({ matricNo }).select("-password");
+  const user = await User.findOne({ matricNumber }).select("-password");
   if (!user) {
     return res
       .status(400)
