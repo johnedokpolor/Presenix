@@ -27,6 +27,9 @@ const userSchema = new mongoose.Schema(
       enum: ["student", "lecturer", "creator"],
       default: "student",
     },
+    attendanceNo: {
+      type: Number,
+    },
     // isVerified: {
     //   type: Boolean,
     //   default: false,

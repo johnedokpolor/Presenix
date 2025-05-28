@@ -46,6 +46,7 @@ export const Register = async (req, res) => {
 
     if (matricNumber != null) {
       user.matricNumber = matricNumber;
+      user.attendanceNo = 0;
     }
 
     //Generates jsonwebtoken
@@ -82,21 +83,9 @@ export const Login = async (req, res) => {
     if (email) {
       // If email is provided, find user by email
       user = await User.findOne({ email });
-      // Checks if email is correct
-      if (!user) {
-        return res
-          .status(400)
-          .json({ success: false, message: "Invalid email" });
-      }
     } else {
       // If matricNumber is provided, find user by matricNumber
       user = await User.findOne({ matricNumber });
-      // Checks if email is correct
-      if (!user) {
-        return res
-          .status(400)
-          .json({ success: false, message: "Invalid Matric Number" });
-      }
     }
 
     const isPasswordValid = await bcryptjs.compare(password, user.password);
@@ -109,10 +98,10 @@ export const Login = async (req, res) => {
     //Generates jsonwebtoken
     generateTokenAndSetCookie(res, user._id);
 
-    // const lastLoginDate = formatDate(Date.now());
+    const lastLoginDate = Date.now();
 
     // Updates user's last login and saves to the database
-    // user.lastLoginDate = lastLoginDate;
+    user.lastLoginDate = lastLoginDate;
 
     // save user to db
     await user.save();
@@ -145,4 +134,29 @@ export const Logout = async (req, res) => {
     path: "/", // Specify the same path used for the cookie
   });
   res.status(200).json({ success: true, message: "Logmged out successfully" });
+};
+
+// @desc   Check if email exists
+// @route  GET /api/auth/check-email
+export const CheckEmail = async (req, res) => {
+  const { email } = req.body;
+  // Check if email is vaiid
+  const user = await User.findOne({ email }).select("-password");
+  if (!user) {
+    return res.status(400).json({ success: false, message: "Invalid Email" });
+  }
+  res.status(200).json({ success: true, message: "Email was found" });
+};
+// @desc   Check if matric number exists
+// @route  GET /api/auth/check-matricno
+export const CheckMatricNo = async (req, res) => {
+  const { matricNo } = req.body;
+  // Check if matric number is vaiid
+  const user = await User.findOne({ matricNo }).select("-password");
+  if (!user) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Invalid Matric Number" });
+  }
+  res.status(200).json({ success: true, message: "Matric Number was found" });
 };
