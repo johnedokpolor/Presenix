@@ -17,7 +17,17 @@ app.use(cookieParser());
 app.use(express.json());
 
 // CORS Policy Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like curl or server-to-server)
+      if (!origin) return callback(null, true);
+      // Allow all origins by echoing back the origin
+      callback(null, origin);
+    },
+    credentials: true, // Allow cookies/auth headers
+  })
+);
 
 // Enables Routing from AuthRoutes
 app.use("/api/auth", authRoutes);

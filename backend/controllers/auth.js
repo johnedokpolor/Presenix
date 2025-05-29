@@ -28,8 +28,8 @@ export const Register = async (req, res) => {
         .json({ success: false, message: "Matric Number Already Exists" });
     }
     let role = "student";
-    // If lecturerInviteToken is provided, set role to lecturer
-    if (lecturerToken && lecturerToken === process.env.LECTURER_TOKEN) {
+    // If lecturerToken is provided, set role to lecturer
+    if (lecturerToken) {
       role = "lecturer";
     }
 
@@ -161,4 +161,25 @@ export const CheckMatricNo = async (req, res) => {
       .json({ success: false, message: "Invalid Matric Number" });
   }
   res.status(200).json({ success: true, message: "Matric Number was found" });
+};
+
+// @desc   Check if user is authenticated
+// @route  GET /api/auth/check-auth
+export const CheckAuth = async (req, res) => {
+  try {
+    // Query database for user and exclude the "password"
+    const user = await User.findById(req.user._id).select("-password");
+    if (!user) {
+      return res
+        .status(400)
+        .json({ success: false, message: "User not found" });
+    }
+    res.status(201).json({
+      success: true,
+      user,
+    });
+  } catch (error) {
+    console.log("Error in checkAuth", error);
+    return res.status(500).json({ success: false, message: error.message });
+  }
 };
