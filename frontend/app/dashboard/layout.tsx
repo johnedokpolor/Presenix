@@ -7,7 +7,7 @@ interface Props {
 
 const layout = ({ children }: Props) => {
   return (
-    <div>
+    <div className="w-screen overflow-x-hidden">
       <div className="md:w-64 fixed hidden md:block">
         <SideNav />
       </div>

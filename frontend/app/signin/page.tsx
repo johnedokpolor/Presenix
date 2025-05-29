@@ -1,26 +1,23 @@
 "use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef, useState } from "react";
-import { Eye, EyeOff, User, Mail, Hash, Lock } from "lucide-react";
+import { Eye, EyeOff, Hash, Lock } from "lucide-react";
 import axiosInstance from "@/utils/axiosInstance";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import useStore from "@/store/store";
-import PasswordStrengthMeter from "@/components/PasswordStrengthMeter";
 
-export default function SignupPage() {
+export default function SigninPage() {
   const router = useRouter();
   const submitButton = useRef<HTMLButtonElement>(null);
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
-    matricNumber: "",
+    email_matricNumber: "",
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [passStrength, setPassStrength] = useState(false);
 
   // Access the store to get user data and setUser function
   const { student } = useStore();
@@ -48,35 +45,44 @@ export default function SignupPage() {
     // Convert email and matricNumber to lowercase
     setFormData((prev) => ({
       ...prev,
-      email: prev.email.toLowerCase(),
-      matricNumber: prev.matricNumber.toLowerCase(),
+      email_matricNumber: prev.email_matricNumber.toLowerCase(),
     }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.password.length < 8) {
-      return toast.error("Password must be at least 8 characters");
-    } else if (!/[A-Z]/.test(formData.password)) {
-      return toast.error("Password must contain an uppercase letter");
-    } else if (!/[a-z]/.test(formData.password)) {
-      return toast.error("Password must contain a lowercase letter");
-    } else if (!/\d/.test(formData.password)) {
-      return toast.error("Password must contain a number");
-    } else if (!/[^A-Za-z0-9]/.test(formData.password)) {
-      return toast.error("Password must contain a special character");
-    }
     setIsLoading(true);
     setError(null);
+    // Define the type to allow either email or matricNumber
+    let submitData: any = {
+      name: formData.name,
+      password: formData.password,
+    };
+
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email_matricNumber)) {
+      // If email_matricNumber is an email, add it as email
+      submitData = {
+        ...submitData,
+        email: formData.email_matricNumber,
+      };
+    } else {
+      console.log("not email");
+      submitData = {
+        ...submitData,
+        matricNumber: formData.email_matricNumber,
+      };
+    }
+
+    console.log(submitData);
 
     // Simulate API call
     try {
-      const response = await axiosInstance.post("/auth/register", formData);
-      toast.success("Account created successfully!");
+      const response = await axiosInstance.post("/auth/login", submitData);
+      toast.success("Logged in successfully!");
       router.push("/dashboard");
       console.log(response.data);
     } catch (error: any) {
-      console.error("Error creating account:", error);
+      console.error("Error logging in account:", error);
       setIsLoading(false);
       setError(error.response.data.message);
     }
@@ -89,72 +95,29 @@ export default function SignupPage() {
       <div className="w-full max-w-md ">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Create Account
-          </h1>
-          <p className="text-gray-600">Fill in your details to get started</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Login</h1>
+          <p className="text-gray-600">Fill in your details to login</p>
         </div>
 
         {/* Form Card */}
         <div className="bg-white border  border-gray-200 rounded-lg shadow-lg p-8">
           <form onSubmit={handleSubmit} className="space-y-6 ">
-            {/* Full Name */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Full Name
-              </label>
-              <div className="relative">
-                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-900
-
- focus:border-transparent"
-                  placeholder="Enter your full name"
-                  required
-                />
-              </div>
-            </div>
-
             {/* Matric Number */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Matric Number
+                Email/Matric Number
               </label>
               <div className="relative">
                 <Hash className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type="text"
-                  name="matricNumber"
-                  value={formData.matricNumber}
+                  name="email_matricNumber"
+                  value={formData.email_matricNumber}
                   onChange={handleInputChange}
                   className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-900
 
  focus:border-transparent"
-                  placeholder="Enter your matric number"
-                  required
-                />
-              </div>
-            </div>
-            {/* Email Address */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Email Address
-              </label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-900
-
- focus:border-transparent"
-                  placeholder="Enter your email address"
+                  placeholder="Enter your email or matric no"
                   required
                 />
               </div>
@@ -172,11 +135,10 @@ export default function SignupPage() {
                   name="password"
                   value={formData.password}
                   onChange={handleInputChange}
-                  onKeyDown={() => setPassStrength(true)}
                   className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-900
 
  focus:border-transparent"
-                  placeholder="Create a password"
+                  placeholder="Enter your password"
                   required
                 />
 
@@ -194,10 +156,6 @@ export default function SignupPage() {
               </div>
             </div>
             {error && <p className="text-red-500 text-sm">{error}</p>}
-            {/* Password strength meter */}
-            {passStrength && (
-              <PasswordStrengthMeter password={formData.password} />
-            )}
 
             {/* Submit Button */}
             <button
@@ -210,27 +168,27 @@ export default function SignupPage() {
               {isLoading ? (
                 <div className="flex items-center justify-center">
                   <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                  Creating Account...
+                  Logging in...
                 </div>
               ) : (
-                "Create Account"
+                "Login"
               )}
             </button>
           </form>
         </div>
 
         {/* Footer */}
-        <div className="mt-6 text-center">
+        {/* <div className="mt-6 text-center">
           <p className="text-gray-600">
             Already have an account?{" "}
             <a
-              href="#"
+              href="/"
               className="text-purple-600 hover:text-purple-700 font-medium"
             >
               Sign in
             </a>
           </p>
-        </div>
+        </div> */}
       </div>
     </div>
   );

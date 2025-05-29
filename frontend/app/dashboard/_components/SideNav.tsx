@@ -1,15 +1,17 @@
 "use client";
+import useStore from "@/store/store";
 import { menuList } from "@/utils/data";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import React from "react";
 
 const SideNav = () => {
-  const { user } = useKindeBrowserClient();
-
-  const acronym = `${user?.given_name?.slice(0, 1)}${user?.family_name?.slice(
-    0,
-    1
-  )}`;
+  const { lecturer, student } = useStore();
+  const user = lecturer ? lecturer : student;
+  const lastname = user?.name.split(" ")[1];
+  const firstname = user?.name.split(" ")[0];
+  // Generate acronym from first and last name only when they are available else return empty string
+  const acronym =
+    (firstname?.charAt(0)?.toUpperCase() ?? "") +
+    (lastname?.charAt(0)?.toUpperCase() ?? "");
   return (
     <div className="shadow-md border h-screen p-5">
       <h1 className="font-bold text-2xl">Presenza</h1>
@@ -29,10 +31,10 @@ const SideNav = () => {
             {acronym}
           </div>
           <div>
-            <h2 className="font-bold text-sm">
-              {user?.given_name} {user?.family_name}
+            <h2 className="font-bold text-sm">{user?.name}</h2>
+            <h2 className="text-xs text-slate-800 dark:text-slate-300">
+              {user?.email}
             </h2>
-            <h2 className="text-xs text-slate-800">{user?.email}</h2>
           </div>
         </div>
       )}

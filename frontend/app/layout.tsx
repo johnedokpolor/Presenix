@@ -3,6 +3,7 @@ import { Toaster } from "react-hot-toast";
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./ThemeProvider";
+import { CheckAuthProvider } from "./CheckAuth";
 const outfit = Outfit({
   weight: ["400", "700"], // Specify font weights you want to use
   subsets: ["latin"], // Specify the character subsets to use (optional)
@@ -33,14 +34,16 @@ export default function RootLayout({
       <body className={`antialiased ${outfit.className}`}>
         <Toaster />
 
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <CheckAuthProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </CheckAuthProvider>
       </body>
     </html>
   );
