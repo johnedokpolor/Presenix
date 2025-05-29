@@ -4,9 +4,9 @@ import { redirect } from "next/navigation";
 
 const Page = () => {
   useEffect(() => {
-    redirect("/api/auth/login?post_login_redirect_url=/dashboard");
+    redirect("/login");
   }, []);
-  return <div>Hello</div>;
+  return <div></div>;
 };
 
 export default Page;
