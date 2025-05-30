@@ -22,6 +22,7 @@ export default function SigninPage() {
 
   // Access the store to get user data and setUser function
   const { student, lecturer, SetUser } = useStore();
+
   // If user is already logged in, redirect to dashboard
   const user = lecturer ? lecturer : student;
   useEffect(() => {

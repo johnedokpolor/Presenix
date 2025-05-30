@@ -14,8 +14,8 @@ export function CheckAuthProvider({
 }) {
   const {
     CheckAuth,
-    student,
-    lecturer,
+    // student,
+    // lecturer,
     // isAuthenticated,
     // isCheckingAuth,
     // error,
