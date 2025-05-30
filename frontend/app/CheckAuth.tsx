@@ -20,7 +20,6 @@ export function CheckAuthProvider({
     // isCheckingAuth,
     // error,
   } = useStore();
-  const user = student ? student : lecturer;
 
   const pathname = usePathname();
 
