@@ -25,11 +25,9 @@ export function CheckAuthProvider({
   const pathname = usePathname();
 
   useEffect(() => {
-    console.log("App changed to:", pathname);
     // Call your custom function here
     CheckAuth();
   }, [pathname]);
 
-  console.log(user);
   return <main {...props}>{children}</main>;
 }

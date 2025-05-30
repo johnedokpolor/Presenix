@@ -5,6 +5,7 @@ import { Eye, EyeOff, Hash, Lock } from "lucide-react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import useStore from "@/store/store";
+import axiosInstance from "@/utils/axiosInstance";
 
 export default function SigninPage() {
   const router = useRouter();
@@ -17,15 +18,17 @@ export default function SigninPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [isValid, setIsValid] = useState(false);
 
   // Access the store to get user data and setUser function
-  const { isAuthenticated, student, lecturer, Login } = useStore();
+  const { isAuthenticated, student, lecturer, SetUser } = useStore();
   // If user is already logged in, redirect to dashboard
+  const user = lecturer ? lecturer : student;
   useEffect(() => {
-    if (isAuthenticated && (student || lecturer)) {
+    if (user) {
       router.push("/dashboard");
     }
-  }, [isAuthenticated, router]);
+  }, [user]);
 
   useEffect(() => {
     // Create a timer to check if the user has stopped typing every 1seconds
@@ -39,6 +42,56 @@ export default function SigninPage() {
 
     return () => clearTimeout(timer);
   }, [formData.password]);
+
+  useEffect(() => {
+    // Create a timer to check if the user has stopped typing every 1seconds
+    const timer = setTimeout(() => {
+      console.log(
+        "User stopped typing. Final input:",
+        formData.email_matricNumber
+      );
+      setError(null);
+      const validateInput = async () => {
+        setIsLoading(true);
+        if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email_matricNumber)) {
+          // If email_matricNumber is an email, add it as email
+          try {
+            const response = await axiosInstance.post(
+              "/auth/check-email",
+
+              { email: formData.email_matricNumber }
+            );
+            console.log(response);
+            setIsValid(true);
+            setIsLoading(false);
+          } catch (error: any) {
+            setError(error.response.data.message);
+            setIsLoading(false);
+          }
+        } else {
+          console.log("not email");
+          try {
+            const response = await axiosInstance.post(
+              "/auth/check-matric-number",
+
+              { matricNumber: formData.email_matricNumber }
+            );
+            console.log(response);
+            setIsLoading(false);
+            setIsValid(true);
+          } catch (error: any) {
+            setIsLoading(false);
+            setError(error.response.data.message);
+          }
+        }
+      };
+      if (formData.email_matricNumber !== "" && !isValid) {
+        validateInput();
+      }
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [formData.email_matricNumber]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -60,8 +113,8 @@ export default function SigninPage() {
     setError(null);
     // Define the type to allow either email or matricNumber
     let submitData: any = {
-      name: formData.name,
       password: formData.password,
+      name: formData.name,
     };
 
     if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email_matricNumber)) {
@@ -82,8 +135,9 @@ export default function SigninPage() {
 
     // Simulate API call
     try {
-      await Login(submitData);
+      const response = await axiosInstance.post("/auth/login", submitData);
       toast.success("Logged in successfully!");
+      SetUser(response.data.user);
     } catch (error: any) {
       console.error("Error logging in account:", error);
       setIsLoading(false);
@@ -120,58 +174,67 @@ export default function SigninPage() {
                   placeholder="Enter your email or matric no"
                   required
                 />
+                <div className="absolute right-3 top-4">
+                  {isLoading && !isValid && (
+                    <div className="w-5 h-5 border-2 border-gray-800 border-t-transparent rounded-full animate-spin mr-2" />
+                  )}
+                </div>
               </div>
             </div>
 
             {/* Password */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Password
-              </label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  className="w-full text-black pl-12 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-900 focus:border-transparent placeholder:text-gray-500"
-                  placeholder="Enter your password"
-                  required
-                />
+            {isValid && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Password
+                </label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                    className="w-full text-black pl-12 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-900 focus:border-transparent placeholder:text-gray-500"
+                    placeholder="Enter your password"
+                    required
+                  />
 
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                >
-                  {showPassword ? (
-                    <EyeOff className="w-5 h-5" />
-                  ) : (
-                    <Eye className="w-5 h-5" />
-                  )}
-                </button>
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  >
+                    {showPassword ? (
+                      <EyeOff className="w-5 h-5" />
+                    ) : (
+                      <Eye className="w-5 h-5" />
+                    )}
+                  </button>
+                </div>
               </div>
-            </div>
+            )}
             {error && <p className="text-red-500 text-sm">{error}</p>}
 
             {/* Submit Button */}
-            <button
-              ref={submitButton}
-              disabled={isLoading}
-              className="w-full py-3 px-4 bg-purple-900 cursor-pointer text-white font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-900
+            {isValid && (
+              <button
+                ref={submitButton}
+                disabled={isLoading}
+                className="w-full py-3 px-4 bg-purple-900 cursor-pointer text-white font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-900
 
  focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isLoading ? (
-                <div className="flex items-center justify-center">
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                  Logging in...
-                </div>
-              ) : (
-                "Login"
-              )}
-            </button>
+              >
+                {isLoading ? (
+                  <div className="flex items-center justify-center">
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                    Logging in...
+                  </div>
+                ) : (
+                  "Login"
+                )}
+              </button>
+            )}
           </form>
         </div>
 
