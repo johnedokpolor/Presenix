@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import useStore from "@/store/store";
 import PasswordStrengthMeter from "@/components/PasswordStrengthMeter";
+import Link from "next/link";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -222,12 +223,12 @@ focus:border-transparent"
         <div className="mt-6 text-center">
           <p className="text-gray-600">
             Already have an account?{" "}
-            <a
-              href="#"
+            <Link
+              href="/signin"
               className="text-purple-600 hover:text-purple-700 font-medium"
             >
               Sign in
-            </a>
+            </Link>
           </p>
         </div>
       </div>
