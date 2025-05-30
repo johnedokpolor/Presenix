@@ -2,9 +2,9 @@ import axiosInstance from "@/utils/axiosInstance";
 import { create } from "zustand";
 
 interface useStoreTypes {
-  CheckAuth: () => void;
-  Logout: () => void;
-  Login: (submitData: any) => void;
+  CheckAuth: () => Promise<void>;
+  Logout: () => Promise<void>;
+  Login: (submitData: any) => Promise<void>;
   student: any;
   lecturer: any;
   isCheckingAuth: boolean;
