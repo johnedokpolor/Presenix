@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 
 const Page = () => {
   useEffect(() => {
-    redirect("/login");
+    redirect("/signin");
   }, []);
   return <div></div>;
 };
