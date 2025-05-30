@@ -92,7 +92,7 @@ export default function SigninPage() {
   };
 
   return (
-    <div className=" bg-white flex items-center justify-center p-4">
+    <div className=" bg-white h-screen flex items-center justify-center p-4">
       <div className="w-full max-w-md ">
         {/* Header */}
         <div className="text-center mb-8">
