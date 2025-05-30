@@ -85,9 +85,21 @@ export const Login = async (req, res) => {
     if (email) {
       // If email is provided, find user by email
       user = await User.findOne({ email });
+      if (!user) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid Email",
+        });
+      }
     } else {
       // If matricNumber is provided, find user by matricNumber
       user = await User.findOne({ matricNumber });
+      if (!user) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid Matric Number",
+        });
+      }
     }
 
     const isPasswordValid = await bcryptjs.compare(password, user.password);
@@ -139,7 +151,7 @@ export const Logout = async (req, res) => {
 };
 
 // @desc   Check if email exists
-// @route  GET /api/auth/check-email
+// @route  POST /api/auth/check-email
 export const CheckEmail = async (req, res) => {
   const { email } = req.body;
   // Check if email is vaiid
@@ -150,7 +162,7 @@ export const CheckEmail = async (req, res) => {
   res.status(200).json({ success: true, message: "Email was found" });
 };
 // @desc   Check if matric number exists
-// @route  GET /api/auth/check-matric-number
+// @route  POST /api/auth/check-matric-number
 export const CheckMatricNo = async (req, res) => {
   const { matricNumber } = req.body;
   // Check if matric number is vaiid
