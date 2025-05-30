@@ -24,7 +24,7 @@ export default function SignupPage() {
   const [passStrength, setPassStrength] = useState(false);
 
   // Access the store to get user data and setUser function
-  const { setUser, student, lecturer } = useStore();
+  const { student, lecturer } = useStore();
 
   useEffect(() => {
     // Create a timer to check if the user has stopped typing every 1seconds
@@ -74,9 +74,8 @@ export default function SignupPage() {
     try {
       const response = await axiosInstance.post("/auth/register", formData);
       toast.success("Account created successfully!");
-      router.push("/dashboard");
+      router.push("/signin");
       console.log(response.data);
-      setUser(response.data.user);
     } catch (error: any) {
       console.error("Error creating account:", error);
       setIsLoading(false);
@@ -88,7 +87,7 @@ export default function SignupPage() {
   console.log("Student:", student);
   console.log("Lecturer:", lecturer);
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center p-4">
+    <div className=" h-screen bg-white flex items-center justify-center p-4">
       <div className="w-full max-w-md ">
         {/* Header */}
         <div className="text-center mb-8">

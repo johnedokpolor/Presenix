@@ -2,8 +2,9 @@ import axiosInstance from "@/utils/axiosInstance";
 import { create } from "zustand";
 
 interface useStoreTypes {
-  setUser: (user: any) => void;
   CheckAuth: () => void;
+  Logout: () => void;
+  Login: (submitData: any) => void;
   student: any;
   lecturer: any;
   isCheckingAuth: boolean;
@@ -18,7 +19,7 @@ const useStore = create<useStoreTypes>((set) => ({
   isCheckingAuth: true,
   isAuthenticated: false,
   CheckAuth: async () => {
-    set({ isCheckingAuth: true, error: null });
+    set({ isCheckingAuth: true, error: null, student: null, lecturer: null });
     try {
       const response = await axiosInstance.get(`auth/check-auth`);
       if (response.data.user.role === "lecturer") {
@@ -42,15 +43,44 @@ const useStore = create<useStoreTypes>((set) => ({
       });
     }
   },
-  setUser: (user: any) => {
-    if (user.role === "student") {
+  Login: async (submitData: any) => {
+    set({ error: null });
+    try {
+      const response = await axiosInstance.post("/auth/login", submitData);
+      if (response.data.user.role === "lecturer") {
+        set({
+          lecturer: response.data.user,
+          isAuthenticated: true,
+          isCheckingAuth: false,
+        });
+      } else {
+        set({
+          student: response.data.user,
+          isAuthenticated: true,
+          isCheckingAuth: false,
+        });
+      }
+    } catch (error) {
       set({
-        student: user,
+        error: error,
+        isCheckingAuth: false,
+        isAuthenticated: false,
       });
-    } else {
+    }
+  },
+  Logout: async () => {
+    set({ error: null });
+    try {
+      await axiosInstance.post("/auth/logout");
       set({
-        lecturer: user,
+        error: null,
+        isAuthenticated: false,
       });
+    } catch (error) {
+      set({
+        error: error,
+      });
+      throw error;
     }
   },
 }));

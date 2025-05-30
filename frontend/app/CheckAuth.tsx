@@ -18,13 +18,10 @@ export function CheckAuthProvider({
     lecturer,
     // isAuthenticated,
     // isCheckingAuth,
-    error,
+    // error,
   } = useStore();
+  const user = student ? student : lecturer;
 
-  // useEffect(() => {
-  //   console.log("Checking auth...");
-  //   CheckAuth();
-  // }, []);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -32,8 +29,7 @@ export function CheckAuthProvider({
     // Call your custom function here
     CheckAuth();
   }, [pathname]);
-  console.log(error);
 
-  console.log("user", lecturer || student);
+  console.log(user);
   return <main {...props}>{children}</main>;
 }

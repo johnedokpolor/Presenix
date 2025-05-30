@@ -73,7 +73,7 @@ export default function SignupPage() {
     try {
       const response = await axiosInstance.post("/auth/register", formData);
       toast.success("Account created successfully!");
-      router.push("/dashboard");
+      router.push("/signin");
       console.log(response.data);
     } catch (error: any) {
       console.error("Error creating account:", error);
@@ -85,7 +85,7 @@ export default function SignupPage() {
 
   console.log(student);
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center p-4">
+    <div className="h-screen bg-white flex items-center justify-center p-4">
       <div className="w-full max-w-md ">
         {/* Header */}
         <div className="text-center mb-8">

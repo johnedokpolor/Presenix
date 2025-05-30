@@ -4,20 +4,30 @@
 import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
-import axiosInstance from "@/utils/axiosInstance";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import useStore from "@/store/store";
 
 const Dashboard = () => {
   const { setTheme } = useTheme();
   const router = useRouter();
 
-  const Logout = async () => {
+  const { isAuthenticated, student, lecturer, Logout } = useStore();
+  const user = student ? student : lecturer;
+  // If user is not logged in, redirect to signin page
+
+  useEffect(() => {
+    if (!isAuthenticated && !user) {
+      console.log("User is not authenticated, redirecting to signin page");
+      router.push("/signin");
+    }
+  }, [isAuthenticated, router]);
+
+  const handleLogout = async () => {
     try {
-      const response = await axiosInstance.post("/auth/logout");
+      await Logout();
       toast.success("Logged out successfully!");
       router.push("/signin");
-      console.log(response.data);
     } catch (error: any) {
       console.error("Error creating account:", error);
     }
@@ -39,7 +49,7 @@ const Dashboard = () => {
         {dark ? "Light Mode" : "Dark Mode"}
       </Button>
 
-      <Button onClick={Logout}>Logout</Button>
+      <Button onClick={handleLogout}>Logout</Button>
     </div>
   );
 };

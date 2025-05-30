@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef, useState } from "react";
 import { Eye, EyeOff, Hash, Lock } from "lucide-react";
-import axiosInstance from "@/utils/axiosInstance";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import useStore from "@/store/store";
@@ -20,7 +19,13 @@ export default function SigninPage() {
   const [error, setError] = useState(null);
 
   // Access the store to get user data and setUser function
-  const { student } = useStore();
+  const { isAuthenticated, student, lecturer, Login } = useStore();
+  // If user is already logged in, redirect to dashboard
+  useEffect(() => {
+    if (isAuthenticated && (student || lecturer)) {
+      router.push("/dashboard");
+    }
+  }, [isAuthenticated, router]);
 
   useEffect(() => {
     // Create a timer to check if the user has stopped typing every 1seconds
@@ -77,21 +82,17 @@ export default function SigninPage() {
 
     // Simulate API call
     try {
-      const response = await axiosInstance.post("/auth/login", submitData);
+      await Login(submitData);
       toast.success("Logged in successfully!");
-      router.push("/dashboard");
-      console.log(response.data);
     } catch (error: any) {
       console.error("Error logging in account:", error);
       setIsLoading(false);
       setError(error.response.data.message);
     }
   };
-  console.log(formData);
 
-  console.log(student);
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center p-4">
+    <div className="h-screen bg-white flex items-center justify-center p-4">
       <div className="w-full max-w-md ">
         {/* Header */}
         <div className="text-center mb-8">
