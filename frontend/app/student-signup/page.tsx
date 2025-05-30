@@ -85,7 +85,7 @@ export default function SignupPage() {
 
   console.log(student);
   return (
-    <div className="h-screen bg-white flex items-center justify-center p-4">
+    <div className=" bg-white flex items-center justify-center p-4">
       <div className="w-full max-w-md ">
         {/* Header */}
         <div className="text-center mb-8">
