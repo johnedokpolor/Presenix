@@ -114,9 +114,8 @@ export default function SigninPage() {
                   name="email_matricNumber"
                   value={formData.email_matricNumber}
                   onChange={handleInputChange}
-                  className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-900
-
- focus:border-transparent"
+                  className="w-full text-black pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-900
+ focus:border-transparent placeholder:text-gray-500"
                   placeholder="Enter your email or matric no"
                   required
                 />
@@ -135,9 +134,7 @@ export default function SigninPage() {
                   name="password"
                   value={formData.password}
                   onChange={handleInputChange}
-                  className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-900
-
- focus:border-transparent"
+                  className="w-full text-black pl-12 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-900 focus:border-transparent placeholder:text-gray-500"
                   placeholder="Enter your password"
                   required
                 />

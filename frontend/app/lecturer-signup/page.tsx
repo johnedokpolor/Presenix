@@ -113,9 +113,9 @@ export default function SignupPage() {
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-900
+                  className="w-full text-black pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-900
 
- focus:border-transparent"
+ focus:border-transparent placeholder:text-gray-500"
                   placeholder="Enter your full name"
                   required
                 />
@@ -154,9 +154,9 @@ export default function SignupPage() {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-900
+                  className="w-full text-black pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-900
 
- focus:border-transparent"
+ focus:border-transparent placeholder:text-gray-500"
                   placeholder="Enter your email address"
                   required
                 />
@@ -176,9 +176,9 @@ export default function SignupPage() {
                   value={formData.password}
                   onChange={handleInputChange}
                   onKeyDown={() => setPassStrength(true)}
-                  className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-900
+                  className="w-full text-black pl-12 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-900
 
- focus:border-transparent"
+ focus:border-transparent placeholder:text-gray-500"
                   placeholder="Create a password"
                   required
                 />
