@@ -25,8 +25,8 @@ export function CheckAuthProvider({
 
   useEffect(() => {
     // Call your custom function here
-    CheckAuth();
-  }, [pathname]);
+    // CheckAuth();
+  }, [CheckAuth]);
 
   return <main {...props}>{children}</main>;
 }

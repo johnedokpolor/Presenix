@@ -99,7 +99,7 @@ export default function SignupPage() {
         </div>
 
         {/* Form Card */}
-        <div className="bg-white border  border-gray-200 rounded-lg shadow-lg p-8">
+        <div className="bg-white border  border-gray-200 rounded-lg shadow-md shadow-purple-400 p-8">
           <form onSubmit={handleSubmit} className="space-y-6 ">
             {/* Full Name */}
             <div>

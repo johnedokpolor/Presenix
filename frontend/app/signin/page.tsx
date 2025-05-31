@@ -64,6 +64,8 @@ export default function SigninPage() {
             );
             console.log(response);
             setIsValid(true);
+            setError(null);
+
             setIsLoading(false);
           } catch (error: any) {
             setError(error.response.data.message);
@@ -80,6 +82,7 @@ export default function SigninPage() {
             console.log(response);
             setIsLoading(false);
             setIsValid(true);
+            setError(null);
           } catch (error: any) {
             setIsLoading(false);
             setError(error.response.data.message);
@@ -156,7 +159,7 @@ export default function SigninPage() {
         </div>
 
         {/* Form Card */}
-        <div className="bg-white border  border-gray-200 rounded-lg shadow-lg p-8">
+        <div className="bg-white border  border-gray-200 rounded-lg shadow-md shadow-purple-400 p-8">
           <form onSubmit={handleSubmit} className="space-y-6 ">
             {/* Matric Number */}
             <div>
