@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import useStore from "@/store/store";
 
 import { ReactNode } from "react";
-import { usePathname } from "next/navigation";
 
 export function CheckAuthProvider({
   children,
@@ -14,19 +13,26 @@ export function CheckAuthProvider({
 }) {
   const {
     CheckAuth,
-    // student,
-    // lecturer,
-    // isAuthenticated,
-    // isCheckingAuth,
-    // error,
-  } = useStore();
 
-  const pathname = usePathname();
+    isCheckingAuth,
+  } = useStore();
 
   useEffect(() => {
     // Call your custom function here
-    // CheckAuth();
+    CheckAuth();
   }, [CheckAuth]);
 
-  return <main {...props}>{children}</main>;
+  return (
+    <main {...props}>
+      <div>
+        {isCheckingAuth ? (
+          <div className="flex items-center justify-center h-screen">
+            <p className="text-lg">Checking authentication...</p>
+          </div>
+        ) : (
+          children
+        )}
+      </div>
+    </main>
+  );
 }

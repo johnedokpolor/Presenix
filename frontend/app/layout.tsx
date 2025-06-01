@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { Toaster } from "react-hot-toast";
+// import { Toaster } from "react-hot-toast";
+import { Toaster } from "sonner";
+
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./ThemeProvider";

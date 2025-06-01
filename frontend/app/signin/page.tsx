@@ -52,43 +52,7 @@ export default function SigninPage() {
         formData.email_matricNumber
       );
       setError(null);
-      const validateInput = async () => {
-        setIsLoading(true);
-        if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email_matricNumber)) {
-          // If email_matricNumber is an email, add it as email
-          try {
-            const response = await axiosInstance.post(
-              "/auth/check-email",
 
-              { email: formData.email_matricNumber }
-            );
-            console.log(response);
-            setIsValid(true);
-            setError(null);
-
-            setIsLoading(false);
-          } catch (error: any) {
-            setError(error.response.data.message);
-            setIsLoading(false);
-          }
-        } else {
-          console.log("not email");
-          try {
-            const response = await axiosInstance.post(
-              "/auth/check-matric-number",
-
-              { matricNumber: formData.email_matricNumber }
-            );
-            console.log(response);
-            setIsLoading(false);
-            setIsValid(true);
-            setError(null);
-          } catch (error: any) {
-            setIsLoading(false);
-            setError(error.response.data.message);
-          }
-        }
-      };
       if (formData.email_matricNumber !== "" && !isValid) {
         validateInput();
       }
@@ -96,6 +60,44 @@ export default function SigninPage() {
 
     return () => clearTimeout(timer);
   }, [formData.email_matricNumber]);
+
+  const validateInput = async () => {
+    setIsLoading(true);
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email_matricNumber)) {
+      // If email_matricNumber is an email, add it as email
+      try {
+        const response = await axiosInstance.post(
+          "/auth/check-email",
+
+          { email: formData.email_matricNumber }
+        );
+        console.log(response);
+        setIsValid(true);
+        setError(null);
+
+        setIsLoading(false);
+      } catch (error: any) {
+        setError(error.response.data.message);
+        setIsLoading(false);
+      }
+    } else {
+      console.log("not email");
+      try {
+        const response = await axiosInstance.post(
+          "/auth/check-matric-number",
+
+          { matricNumber: formData.email_matricNumber }
+        );
+        console.log(response);
+        setIsLoading(false);
+        setIsValid(true);
+        setError(null);
+      } catch (error: any) {
+        setIsLoading(false);
+        setError(error.response.data.message);
+      }
+    }
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -159,7 +161,7 @@ export default function SigninPage() {
         </div>
 
         {/* Form Card */}
-        <div className="bg-white border  border-gray-200 rounded-lg shadow-md shadow-purple-400 p-8">
+        <div className="bg-white border  border-gray-200 rounded-lg shadow-sm shadow-black p-8">
           <form onSubmit={handleSubmit} className="space-y-6 ">
             {/* Matric Number */}
             <div>

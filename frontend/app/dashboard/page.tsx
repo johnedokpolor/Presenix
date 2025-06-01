@@ -12,11 +12,8 @@ const Dashboard = () => {
   const { setTheme } = useTheme();
   const router = useRouter();
 
-  const { isAuthenticated, student, lecturer, Logout, CheckAuth } = useStore();
-  const user = student ? student : lecturer;
+  const { isAuthenticated, Logout } = useStore();
   // If user is not logged in, redirect to signin page
-
-  CheckAuth();
 
   useEffect(() => {
     if (!isAuthenticated) {

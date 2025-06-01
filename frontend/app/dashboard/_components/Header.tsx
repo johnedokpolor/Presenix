@@ -27,7 +27,12 @@ const Header = () => {
           )}
         </button>
         {openMenu && (
-          <div className="fixed left-0 lg:hidden backdrop-blur-[1px] w-full top-[65px] z-50">
+          <div
+            onClick={() => {
+              setOpenMenu(!openMenu);
+            }}
+            className="fixed left-0 lg:hidden backdrop-blur-[1px] w-full top-[65px] z-50"
+          >
             <SideNav />
           </div>
         )}
