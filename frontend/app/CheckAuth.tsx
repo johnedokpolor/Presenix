@@ -18,7 +18,7 @@ export function CheckAuthProvider({
   } = useStore();
 
   useEffect(() => {
-    // Call your custom function here
+    // Call your custom function here.
     CheckAuth();
   }, [CheckAuth]);
 
@@ -27,7 +27,7 @@ export function CheckAuthProvider({
       <div>
         {isCheckingAuth ? (
           <div className="flex items-center justify-center h-screen">
-            <p className="text-lg">Checking authentication...</p>
+            <p className="text-lg">Checking authentication.....</p>
           </div>
         ) : (
           children
