@@ -15,7 +15,7 @@ const SideNav = () => {
     (lastname?.charAt(0)?.toUpperCase() ?? "");
   return (
     <div className="shadow-md md:border w-2/3 md:w-full  h-screen p-5 bg-white">
-      <h1 className="font-bold text-2xl">Presenza</h1>
+      <h1 className="font-bold text-2xl">Presenix</h1>
       <hr className="my-5" />
       {menuList.map((menu, index) => (
         <Link

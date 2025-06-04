@@ -6,7 +6,7 @@ import crypto from "node:crypto";
 // @route  GET /api/users
 export const GetAllUsers = async (req, res) => {
   try {
-    const users = await User.find({}).select("-password");
+    const users = await User.find({ role: "student" }).select("-password");
     res.status(200).json({
       success: true,
       users,
@@ -20,7 +20,6 @@ export const GetAllUsers = async (req, res) => {
 // @route  GET /api/users/attendancelinks
 export const GetAttendanceLinks = async (req, res) => {
   try {
-    // Check if the user is a lecturer
     const attendanceTokens = await Attendance.find({});
 
     if (!attendanceTokens) {

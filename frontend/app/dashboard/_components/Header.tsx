@@ -17,9 +17,9 @@ const Header = () => {
     (lastname?.charAt(0)?.toUpperCase() ?? "");
 
   return (
-    <div className="shadow-sm flex items-center justify-between p-4 border">
+    <div className="shadow-sm flex  items-center fixed z-50 top-0 md:w-[80%] w-full bg-white  justify-between p-4 border">
       <div>
-        <button onClick={() => setOpenMenu(!openMenu)}>
+        <button className="md:hidden" onClick={() => setOpenMenu(!openMenu)}>
           {openMenu ? (
             <X className="w-6 h-6  cursor-pointer" />
           ) : (

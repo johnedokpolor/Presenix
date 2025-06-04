@@ -8,13 +8,13 @@ interface Props {
 const layout = ({ children }: Props) => {
   return (
     <div className="w-screen overflow-x-hidden">
-      <div className="md:w-64  fixed hidden md:block">
+      <div className="md:w-[20%]  fixed hidden md:block">
         <SideNav />
       </div>
 
-      <div className="md:ml-64">
+      <div className="md:ml-[20%] md:w-[80%] ">
         <Header />
-        {children}
+        <div className="mt-20">{children}</div>
       </div>
     </div>
   );

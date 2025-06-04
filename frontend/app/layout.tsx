@@ -12,18 +12,18 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Presenza",
+  title: "Presenix",
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
   },
-  keywords: ["presenza"],
+  keywords: ["presenix"],
   authors: [
     {
       name: "Jason Dboss",
     },
   ],
-  description: "Smart attendance system",
+  description: "Smart Presence, Smarter Learning",
 };
 
 export default function RootLayout({
@@ -33,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased ${outfit.className}`}>
+      <body className={`antialiased ${outfit.className} overflow-x-hidden`}>
         <Toaster />
 
         <CheckAuthProvider>
