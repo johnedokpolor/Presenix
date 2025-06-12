@@ -8,7 +8,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const layout = ({ children }: Props) => {
+const Layout = ({ children }: Props) => {
   const router = useRouter();
   const { user } = useStore();
   // If user is not logged in, redirect to signin page
@@ -34,4 +34,4 @@ const layout = ({ children }: Props) => {
   );
 };
 
-export default layout;
+export default Layout;
