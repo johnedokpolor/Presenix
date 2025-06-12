@@ -24,12 +24,12 @@ const UserDetails = () => {
     <div className="group relative md:cursor-pointer">
       <div
         onClick={() => setdetails(!details)}
-        className="relative text-xl bottom-[5px] mt-3 flex h-10 w-10 items-center justify-center rounded-full bg-purple-900 text-white"
+        className="relative text-xl   flex h-10 w-10 items-center justify-center rounded-full bg-purple-900 text-white"
       >
         {user.name.slice(0, 1)}
       </div>
       {details && (
-        <div className="absolute right-0 z-[50] mt-3 w-[300px] flex-col items-center rounded-xl bg-gray-200 p-3 shadow-lg  dark:bg-[#1f1f1f] md:w-[400px]">
+        <div className="absolute right-0 z-[50] mt-3 w-[300px] flex-col flex items-center rounded-xl bg-gray-200 p-3 shadow-lg  dark:bg-[#1f1f1f] md:w-[400px]">
           <p className="text-center text-lg">{user.email}</p>
           <div className="mt-3 flex h-16 w-16 items-center justify-center rounded-full bg-purple-900 text-white">
             {user.name.slice(0, 1)}
