@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import useStore from "@/store/store";
 import React from "react";
 import { toast } from "sonner";
