@@ -5,10 +5,9 @@ import React, { useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-const UserDetails = () => {
+const UserDetails = ({ user }: { user: any }) => {
   const router = useRouter();
-  const { student, lecturer, Logout } = useStore();
-  const user = student ? student : lecturer;
+  const { Logout } = useStore();
   const [details, setdetails] = useState(false);
 
   const handleLogout = async () => {

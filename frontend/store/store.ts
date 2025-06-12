@@ -2,12 +2,13 @@ import axiosInstance from "@/utils/axiosInstance";
 import { create } from "zustand";
 
 interface useStoreTypes {
-  CheckAuth: () => Promise<void>;
+  CheckAuth: () => void;
   SetUser: (user: any) => Promise<void>;
   Logout: () => Promise<void>;
   Login: (submitData: any) => Promise<void>;
   student: any;
   lecturer: any;
+  user: any;
   isCheckingAuth: boolean;
   isAuthenticated: boolean;
   error: any;
@@ -17,28 +18,21 @@ interface useStoreTypes {
 const useStore = create<useStoreTypes>((set) => ({
   student: null,
   lecturer: null,
+  user: null,
   error: null,
   authError: null,
   isCheckingAuth: true,
   isAuthenticated: false,
   CheckAuth: async () => {
-    set({ isCheckingAuth: true, error: null, student: null, lecturer: null });
+    set({ error: null, student: null, user: null, lecturer: null });
     try {
-      const response = await axiosInstance.get(`auth/check-auth`);
-      if (response.data.user.role === "lecturer") {
-        set({
-          lecturer: response.data.user,
-          isAuthenticated: true,
-          isCheckingAuth: false,
-        });
-      } else {
-        set({
-          student: response.data.user,
-          isAuthenticated: true,
-          isCheckingAuth: false,
-        });
-      }
-      return response.data;
+      const { data } = await axiosInstance.get(`auth/check-auth`);
+      set({
+        user: data.user,
+        isAuthenticated: true,
+        isCheckingAuth: false,
+      });
+      return data;
     } catch (error) {
       set({
         error: error,
@@ -51,15 +45,9 @@ const useStore = create<useStoreTypes>((set) => ({
   SetUser: async (user) => {
     set({ error: null, student: null, lecturer: null });
     try {
-      if (user.role === "lecturer") {
-        set({
-          lecturer: user,
-        });
-      } else {
-        set({
-          student: user,
-        });
-      }
+      set({
+        user: user,
+      });
     } catch (error) {
       set({
         error: error,
@@ -96,8 +84,7 @@ const useStore = create<useStoreTypes>((set) => ({
     try {
       await axiosInstance.post("/auth/logout");
       set({
-        student: null,
-        lecturer: null,
+        user: null,
       });
     } catch (error) {
       set({

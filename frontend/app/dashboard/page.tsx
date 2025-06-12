@@ -16,26 +16,6 @@ const Dashboard = () => {
   const { setTheme } = useTheme();
   const router = useRouter();
 
-  const { isAuthenticated, Logout } = useStore();
-  // If user is not logged in, redirect to signin page
-
-  useEffect(() => {
-    if (!isAuthenticated) {
-      console.log("User is not authenticated, redirecting to signin page");
-      router.push("/signin");
-    }
-  }, [isAuthenticated]);
-
-  const handleLogout = async () => {
-    try {
-      await Logout();
-      toast.success("Logged out successfully!");
-      router.push("/signin");
-    } catch (error: any) {
-      console.error("Error creating account:", error);
-    }
-  };
-
   const [dark, setdark] = useState(false);
   const [students, setStudents] = useState<Student[]>([]);
   const [attendanceLinks, setAttendanceLinks] = useState([]);

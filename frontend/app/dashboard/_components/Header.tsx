@@ -8,8 +8,7 @@ import UserDetails from "./UserDetails";
 const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
 
-  const { lecturer, student } = useStore();
-  const user = lecturer ? lecturer : student;
+  const { user } = useStore();
   const lastname = user?.name.split(" ")[1];
   const firstname = user?.name.split(" ")[0];
   // Generate acronym from first and last name only when they are available else return empty string
@@ -18,7 +17,7 @@ const Header = () => {
     (lastname?.charAt(0)?.toUpperCase() ?? "");
 
   return (
-    <div className="shadow-sm flex  items-center fixed z-50 top-0 md:w-[80%] w-full bg-white  justify-between p-4 border">
+    <div className="shadow-sm flex items-center fixed z-50 top-0 md:w-[80%] w-full bg-white  justify-between p-4 border">
       <div>
         <button className="md:hidden" onClick={() => setOpenMenu(!openMenu)}>
           {openMenu ? (
@@ -39,7 +38,7 @@ const Header = () => {
         )}
       </div>
 
-      <div>{user && <UserDetails />}</div>
+      <div>{user && <UserDetails user={user} />}</div>
     </div>
   );
 };

@@ -22,10 +22,9 @@ export default function SigninPage() {
   const [isValid, setIsValid] = useState(false);
 
   // Access the store to get user data and setUser function
-  const { student, lecturer, SetUser } = useStore();
+  const { user, SetUser } = useStore();
 
   // If user is already logged in, redirect to dashboard
-  const user = lecturer ? lecturer : student;
   useEffect(() => {
     if (user) {
       router.push("/dashboard");
@@ -54,7 +53,7 @@ export default function SigninPage() {
       );
       setError(null);
 
-      if (formData.email_matricNumber !== "" && !isValid) {
+      if (formData.email_matricNumber.length > 5 && !isValid) {
         validateInput();
       }
     }, 1000);
@@ -142,10 +141,11 @@ export default function SigninPage() {
 
     // Simulate API call
     try {
-      const response = await axiosInstance.post("/auth/login", submitData);
+      const { data } = await axiosInstance.post("/auth/login", submitData);
+      SetUser(data.user);
       toast.success("Logged in successfully!");
-      SetUser(response.data.user);
-      console.log("Login response:", response.data);
+      router.push("/dashboard");
+      console.log("Login response:", data);
     } catch (error: any) {
       console.error("Error logging in account:", error);
       setIsLoading(false);

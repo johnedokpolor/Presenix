@@ -11,17 +11,15 @@ export function CheckAuthProvider({
 }: {
   children: ReactNode;
 }) {
-  const {
-    CheckAuth,
-
-    isCheckingAuth,
-  } = useStore();
+  const { CheckAuth, user, isCheckingAuth } = useStore();
 
   useEffect(() => {
     // Call your custom function here.
+    console.log("Checking Auth..");
     CheckAuth();
   }, [CheckAuth]);
   console.log("isCheckingAuth", isCheckingAuth);
+  console.log("user", user);
 
   return (
     <main {...props}>
