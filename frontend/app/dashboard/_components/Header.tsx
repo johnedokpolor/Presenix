@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import useStore from "@/store/store";
 import { Menu, X } from "lucide-react";
 import SideNav from "./SideNav";
+import UserDetails from "./UserDetails";
 
 const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -38,13 +39,7 @@ const Header = () => {
         )}
       </div>
 
-      <div>
-        {acronym && (
-          <div className="bg-purple-900 text-white size-10 flex justify-center items-center  text-xl rounded-full">
-            {acronym}
-          </div>
-        )}
-      </div>
+      <div>{user && <UserDetails />}</div>
     </div>
   );
 };

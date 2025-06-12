@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { Eye, EyeOff, User, Mail, Hash, Lock } from "lucide-react";
 import axiosInstance from "@/utils/axiosInstance";
 import { toast } from "sonner";
-
 import { useRouter } from "next/navigation";
 import useStore from "@/store/store";
 import PasswordStrengthMeter from "@/components/PasswordStrengthMeter";
