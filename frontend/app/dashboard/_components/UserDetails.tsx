@@ -22,7 +22,10 @@ const UserDetails = () => {
   };
   return (
     <div className="group relative md:cursor-pointer">
-      <div className="relative text-xl bottom-[5px] mt-3 flex h-10 w-10 items-center justify-center rounded-full bg-purple-900 text-white">
+      <div
+        onClick={() => setdetails(!details)}
+        className="relative text-xl bottom-[5px] mt-3 flex h-10 w-10 items-center justify-center rounded-full bg-purple-900 text-white"
+      >
         {user.name.slice(0, 1)}
       </div>
       {details && (
