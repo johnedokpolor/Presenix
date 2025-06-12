@@ -4,12 +4,13 @@ import AddNewStudent from "./_components/AddNewStudent";
 import StudentListTable from "./_components/StudentListTable";
 import axiosInstance from "@/utils/axiosInstance";
 
+export interface Student {
+  name: string;
+  matricNumber: string;
+  attendanceNo: number;
+  attendancePercent: number;
+}
 const Students = () => {
-  type Student = {
-    name: string;
-    matricNumber: string;
-    attendanceNo: string;
-  };
   const [students, setStudents] = useState<Student[]>([]);
   const [attendanceLinks, setAttendanceLinks] = useState([]);
 
@@ -36,11 +37,14 @@ const Students = () => {
       console.error(error);
     }
   };
+  const deleteStudent = async (id: string) => {
+    await axiosInstance.delete(`/users/${id}`);
+    GetAllStudents();
+  };
   return (
-    <div className="p-7">
-      <h2 className="font-bold text-2xl  flex items-center justify-between">
+    <div className="p-5 md:p-7">
+      <h2 className="font-bold text-2xl mb-5  flex items-center justify-between">
         Students
-        <AddNewStudent />
       </h2>
 
       <StudentListTable students={students} attendanceLinks={attendanceLinks} />

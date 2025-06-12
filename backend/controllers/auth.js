@@ -38,16 +38,15 @@ export const Register = async (req, res) => {
 
     //Creates a User Object Using the User Model
     const user = new User({
+      email,
       password: hashedPassword,
       name,
       role,
     });
 
-    if (email) {
-      user.email = email;
-    }
     if (matricNumber) {
       user.attendanceNo = 0;
+      user.attendancePercent = 0;
       user.matricNumber = matricNumber;
     }
 

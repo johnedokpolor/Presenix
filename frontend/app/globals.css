@@ -117,3 +117,12 @@
     /* @apply bg-background text-foreground; */
   }
 }
+
+/* @media (max-width: 640px) {
+  .ag-theme-apline .ag-paging-panel {
+    @apply flex-col items-center gap-4;
+  }
+  .ag-theme-apline .ag-paging-button {
+    @apply text-sm p-3;
+  }
+} */

@@ -21,6 +21,7 @@ export function CheckAuthProvider({
     // Call your custom function here.
     CheckAuth();
   }, [CheckAuth]);
+  console.log("isCheckingAuth", isCheckingAuth);
 
   return (
     <main {...props}>

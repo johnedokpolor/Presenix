@@ -30,6 +30,7 @@ const userSchema = new mongoose.Schema(
     attendanceNo: {
       type: Number,
     },
+
     // isVerified: {
     //   type: Boolean,
     //   default: false,

@@ -5,7 +5,11 @@ import { Attendance } from "../../models/attendance.js";
 // @route  POST /api/users/mark-attendance
 export const MarkAttendance = async (req, res) => {
   try {
-    const user = await User.findById(req.user._id);
+    const user = req.user;
+    const attendanceTokens = await Attendance.find({}).populate(
+      "studentsPresent",
+      "name matricNumber"
+    );
     // Check if the user is a student
     if (user.role !== "student") {
       return res.status(403).json({

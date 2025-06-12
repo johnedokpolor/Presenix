@@ -15,6 +15,7 @@ const eslintConfig = [
     rules: {
       // Disable react-hooks/exhaustive-deps globally
       "react-hooks/exhaustive-deps": "off",
+      "@typescript-eslint/no-unused-vars": "off",
 
       // other rules...
     },

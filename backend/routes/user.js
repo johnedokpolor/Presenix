@@ -4,9 +4,10 @@ import {
   GenerateAttendanceLink,
   GetAttendanceLinks,
   DeleteUser,
+  DeleteAttendanceLink,
 } from "../controllers/user/lecturer.js";
 import { MarkAttendance } from "../controllers/user/user.js";
-import { protect } from "../middlewares/auth.js";
+import { protect, verifyLecturer } from "../middlewares/auth.js";
 
 const router = express.Router();
 
@@ -15,7 +16,9 @@ router.post("/generate-attendance-link", protect, GenerateAttendanceLink);
 router
   .route("/attendancelinks")
   .get(protect, GetAttendanceLinks)
-  .post(protect, GenerateAttendanceLink);
+  .post(protect, verifyLecturer, GenerateAttendanceLink);
+
+router.delete("/attendancelinks/:id", DeleteAttendanceLink);
 router.delete("/:id", DeleteUser);
 
 // All User Routes

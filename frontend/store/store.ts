@@ -49,7 +49,7 @@ const useStore = create<useStoreTypes>((set) => ({
     }
   },
   SetUser: async (user) => {
-    set({ isCheckingAuth: true, error: null, student: null, lecturer: null });
+    set({ error: null, student: null, lecturer: null });
     try {
       if (user.role === "lecturer") {
         set({

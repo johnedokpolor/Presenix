@@ -2,7 +2,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef, useState } from "react";
 import { Eye, EyeOff, Hash, Lock } from "lucide-react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
+
 import { useRouter } from "next/navigation";
 import useStore from "@/store/store";
 import axiosInstance from "@/utils/axiosInstance";
@@ -17,7 +18,7 @@ export default function SigninPage() {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const [isValid, setIsValid] = useState(false);
 
   // Access the store to get user data and setUser function
@@ -94,6 +95,7 @@ export default function SigninPage() {
         setError(null);
       } catch (error: any) {
         setIsLoading(false);
+        console.log(error);
         setError(error.response.data.message);
       }
     }
@@ -120,7 +122,6 @@ export default function SigninPage() {
     // Define the type to allow either email or matricNumber
     let submitData: any = {
       password: formData.password,
-      name: formData.name,
     };
 
     if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email_matricNumber)) {
@@ -144,9 +145,13 @@ export default function SigninPage() {
       const response = await axiosInstance.post("/auth/login", submitData);
       toast.success("Logged in successfully!");
       SetUser(response.data.user);
+      console.log("Login response:", response.data);
     } catch (error: any) {
       console.error("Error logging in account:", error);
       setIsLoading(false);
+      if (error.message.startsWith("timeout")) {
+        return setError("Network error, try again later...");
+      }
       setError(error.response.data.message);
     }
   };

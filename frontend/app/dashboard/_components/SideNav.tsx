@@ -2,9 +2,11 @@
 import useStore from "@/store/store";
 import { menuList } from "@/utils/data";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
 
 const SideNav = () => {
+  const pathname = usePathname();
   const { lecturer, student } = useStore();
   const user = lecturer ? lecturer : student;
   const lastname = user?.name.split(" ")[1];
@@ -20,7 +22,9 @@ const SideNav = () => {
       {menuList.map((menu, index) => (
         <Link
           href={menu.path}
-          className="flex items-center gap-3 text-lg p-4 my-2 duration-500 text-slate-900 dark:text-slate-100 hover:bg-purple-900 hover:text-white cursor-pointer rounded-lg"
+          className={`flex items-center gap-3 text-lg p-4 my-2 duration-500 text-slate-900 dark:text-slate-100 hover:bg-purple-900 hover:text-white cursor-pointer rounded-lg ${
+            pathname === menu.path && "bg-purple-900 text-white"
+          }`}
           key={index}
         >
           <menu.icon />
