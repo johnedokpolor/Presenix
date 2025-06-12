@@ -91,7 +91,7 @@ const StudentListTable: React.FC<StudentListTableProps> = ({
 
   return (
     <div>
-      {/* <div className="p-2 border-1 mb-4 rounded-lg shadow-sm flex gap-2 max-w-sm">
+      <div className="p-2 border-1 mb-4 rounded-lg shadow-sm flex gap-2 max-w-sm">
         <Search />
         <input
           type="text"
@@ -99,7 +99,7 @@ const StudentListTable: React.FC<StudentListTableProps> = ({
           className="outline-none w-full"
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-      </div> */}
+      </div>
       {/* <div className="overflow-x-auto p-0  mt-3">
         <table className="min-w-full">
           <thead className="bg-gray-200">
