@@ -26,3 +26,24 @@ export const menuList = [
     path: "/dashboard/settings",
   },
 ];
+export const studentList = [
+  {
+    id: 0,
+    name: "Dashboard",
+    icon: LayoutIcon,
+    path: "/student-dashboard",
+  },
+
+  {
+    id: 1,
+    name: "Attendance",
+    icon: Hand,
+    path: "/student-dashboard/attendance",
+  },
+  {
+    id: 2,
+    name: "Settings",
+    icon: Settings,
+    path: "/student-dashboard/settings",
+  },
+];

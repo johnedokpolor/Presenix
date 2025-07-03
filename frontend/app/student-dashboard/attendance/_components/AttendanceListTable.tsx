@@ -14,9 +14,11 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 const AttendanceListTable = ({
   attendanceLinks,
   getAll,
+  isMissed,
 }: {
   attendanceLinks: any;
   getAll: () => void;
+  isMissed?: boolean;
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
   // Column Definitions: Defines the columns to be displayed.
@@ -27,10 +29,6 @@ const AttendanceListTable = ({
       : link.name.includes(searchTerm) ||
           link.matricNumber.includes(searchTerm);
   });
-  const deleteAttendanceLink = async (id: string) => {
-    await axiosInstance.delete(`/users/attendancelinks/${id}`);
-    getAll();
-  };
 
   return (
     <div>
@@ -43,6 +41,9 @@ const AttendanceListTable = ({
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div> */}
+      <h2 className="font-bold text-2xl my-5 flex items-center justify-between">
+        {isMissed ? "Classes Missed" : "Classes Attended"}
+      </h2>
       <div className="overflow-x-auto p-0  mt-3">
         <table className="min-w-full">
           <thead className="bg-gray-200">
@@ -55,9 +56,6 @@ const AttendanceListTable = ({
               </th>
               <th className=" py-3 px-4 border-1 border-gray-400 text-nowrap text-gray-800 font-medium text-sm dark:text-white">
                 Created On
-              </th>
-              <th className=" py-3 px-4 border-1 border-gray-400 text-nowrap text-gray-800 font-medium text-sm dark:text-white">
-                Action
               </th>
             </tr>
           </thead>
@@ -72,9 +70,6 @@ const AttendanceListTable = ({
                 </td>
                 <td className="py-4 px-4 text-gray-700 dark:text-white text-[13px] border-1">
                   {moment(link.createdAt).format("MMM D, YYYY h:mm A")}
-                </td>
-                <td className="py-4 px-4 text-gray-700 dark:text-white text-[13px] border-1 ">
-                  <Trash onClick={() => deleteAttendanceLink(link._id)} />
                 </td>
               </tr>
             ))}

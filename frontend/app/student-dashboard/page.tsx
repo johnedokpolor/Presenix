@@ -18,36 +18,27 @@ const Dashboard = () => {
   const { user, SetUser } = useStore();
 
   const [dark, setdark] = useState(false);
-  const [students, setStudents] = useState<Student[]>([]);
+
   const [attendanceLinks, setAttendanceLinks] = useState([]);
 
   // Calculates students attendance percentage
-  let percentage = 0;
-  students.map((student: any) => {
-    percentage += (student.attendanceNo / attendanceLinks.length) * 100;
-  });
-  const averageAttendance = percentage / students.length;
-  console.log(averageAttendance);
 
   useEffect(() => {
-    GetAllStudents();
     GetAttendanceLinks();
     return () => {};
   }, []);
 
-  const GetAllStudents = async () => {
-    try {
-      const response = await axiosInstance.get("/users");
-      setStudents(response.data.users);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  let percentage = (user.attendanceNo / attendanceLinks.length) * 100;
+  console.log(user.attendanceNo, attendanceLinks.length);
+  console.log(percentage);
+
   const GetAttendanceLinks = async () => {
     try {
-      const response = await axiosInstance.get("/users/attendancelinks");
-      setAttendanceLinks(response.data.attendanceTokens);
-      console.log(response.data.attendanceTokens);
+      console.log("Getting Links");
+      const { data } = await axiosInstance.get("/users/attendancelinks");
+      setAttendanceLinks(data.attendanceTokens);
+      // console.log(data.attendanceTokens);
+      console.log(data);
     } catch (error) {
       console.error(error);
     }
@@ -63,11 +54,11 @@ const Dashboard = () => {
   const PieChartData = [
     {
       title: "Total Present",
-      count: Math.floor(averageAttendance),
+      count: Math.floor(percentage),
     },
     {
       title: "Total Absent",
-      count: Math.floor(100 - averageAttendance),
+      count: Math.floor(100 - percentage),
     },
   ];
 
@@ -75,26 +66,20 @@ const Dashboard = () => {
   return (
     <div className="p-5 md:p-7 ">
       <p className="font-bold text-2xl">Dashboard</p>
-      <p className="font-medium text-xl">Hello, Lecturer {user.name} </p>
+      <p className="font-medium text-xl">Hello, Student {user.name} </p>
 
-      <StatusList
-        totalStudents={students.length}
-        presentPer={averageAttendance}
-        absentPer={100 - averageAttendance}
-      />
+      <StatusList presentPer={percentage} absentPer={100 - percentage} />
 
       <div className="border p-5 rounded-lg">
         <div className="flex items-center justify-between">
           <h5 className="font-bold text-xl">Attendance Percentage</h5>
         </div>
-        {averageAttendance ? (
+        {percentage ? (
           <CustomPieChart data={PieChartData} colors={colors} />
         ) : (
           <p>No Student Attendance</p>
         )}
       </div>
-
-      {/* <Button onClick={handleLogout}>Logout</Button> */}
     </div>
   );
 };

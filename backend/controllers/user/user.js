@@ -2,7 +2,7 @@ import { User } from "../../models/user.js";
 import { Attendance } from "../../models/attendance.js";
 
 // @desc   Mark attendance for a student
-// @route  POST /api/users/mark-attendance
+// @route  GET /api/users/mark-attendance
 export const MarkAttendance = async (req, res) => {
   try {
     const user = req.user;
@@ -24,7 +24,7 @@ export const MarkAttendance = async (req, res) => {
       // If no valid attendance token is found, mark the user as absent
       return res.status(404).json({
         success: false,
-        message: "Token expired, you can't mark attendance anymore",
+        message: "Token expired, marked as absent",
       });
     }
 

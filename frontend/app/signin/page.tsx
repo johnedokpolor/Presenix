@@ -26,8 +26,10 @@ export default function SigninPage() {
 
   // If user is already logged in, redirect to dashboard
   useEffect(() => {
-    if (user) {
+    if (user && user.role === "lecturer") {
       router.push("/dashboard");
+    } else if (user && user.role === "student") {
+      router.push("/student-dashboard");
     }
   }, [user]);
 
@@ -144,7 +146,6 @@ export default function SigninPage() {
       const { data } = await axiosInstance.post("/auth/login", submitData);
       SetUser(data.user);
       toast.success("Logged in successfully!");
-      router.push("/dashboard");
       console.log("Login response:", data);
     } catch (error: any) {
       console.error("Error logging in account:", error);
