@@ -28,6 +28,7 @@ const Dashboard = () => {
   });
   const averageAttendance = percentage / students.length;
   console.log(averageAttendance);
+  console.log(attendanceLinks);
 
   useEffect(() => {
     GetAllStudents();
@@ -81,6 +82,7 @@ const Dashboard = () => {
         totalStudents={students.length}
         presentPer={averageAttendance}
         absentPer={100 - averageAttendance}
+        attendanceLinks={attendanceLinks.length}
       />
 
       <div className="border p-5 rounded-lg">

@@ -52,10 +52,14 @@ const Attendance = () => {
         </Button>
       </h2>
 
-      <AttendanceListTable
-        attendanceLinks={attendanceLinks}
-        getAll={GetAttendanceLinks}
-      />
+      {attendanceLinks.length != 0 ? (
+        <AttendanceListTable
+          attendanceLinks={attendanceLinks}
+          getAll={GetAttendanceLinks}
+        />
+      ) : (
+        <div>No Attendance Links</div>
+      )}
     </div>
   );
 };
