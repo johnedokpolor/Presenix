@@ -3,18 +3,15 @@
 
 import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
-import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
+
 import { useRouter } from "next/navigation";
 import useStore from "@/store/store";
 import axiosInstance from "@/utils/axiosInstance";
-import { Student } from "@/app/dashboard/students/page";
 import StatusList from "./_components/StatusList";
 import CustomPieChart from "./_components/PieChart";
 
 const Dashboard = () => {
   const { setTheme } = useTheme();
-  const router = useRouter();
   const { user, SetUser } = useStore();
 
   const [dark, setdark] = useState(false);

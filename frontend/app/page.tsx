@@ -374,7 +374,7 @@ const PresenixLanding = () => {
                   ))}
                 </div>
                 <p className="text-gray-700 mb-6 italic leading-relaxed">
-                  "{testimonial.quote}"
+                  &quot;{testimonial.quote}&quot;
                 </p>
                 <div>
                   <div className="font-semibold text-gray-900">
