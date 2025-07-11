@@ -52,7 +52,7 @@ const Attendance = () => {
         </Button>
       </h2>
 
-      {attendanceLinks.length != 0 ? (
+      {attendanceLinks.length !== 0 ? (
         <AttendanceListTable
           attendanceLinks={attendanceLinks}
           getAll={GetAttendanceLinks}

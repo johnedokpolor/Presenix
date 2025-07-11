@@ -5,6 +5,7 @@ import StudentListTable from "./_components/StudentListTable";
 import axiosInstance from "@/utils/axiosInstance";
 
 export interface Student {
+  _id: string;
   name: string;
   matricNumber: string;
   attendanceNo: number;
@@ -37,10 +38,7 @@ const Students = () => {
       console.error(error);
     }
   };
-  const deleteStudent = async (id: string) => {
-    await axiosInstance.delete(`/users/${id}`);
-    GetAllStudents();
-  };
+
   return (
     <div className="p-5 md:p-7">
       <h2 className="font-bold text-2xl mb-5  flex items-center justify-between">

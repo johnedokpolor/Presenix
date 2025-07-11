@@ -2,10 +2,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { AllCommunityModule, ModuleRegistry } from "ag-grid-community";
-import { Search } from "lucide-react";
+import { Search, Trash } from "lucide-react";
 import { AgGridReact } from "ag-grid-react";
 import { ColDef } from "ag-grid-community";
 import axiosInstance from "@/utils/axiosInstance";
+import { toast } from "sonner";
 
 // Register all Community features
 ModuleRegistry.registerModules([AllCommunityModule]);
@@ -15,6 +16,7 @@ interface Student {
   matricNumber: string;
   attendanceNo: number;
   attendancePercent: number;
+  _id: string;
 }
 
 interface StudentListTableProps {
@@ -37,6 +39,16 @@ const StudentListTable: React.FC<StudentListTableProps> = ({
   const [rowData, setRowData] = useState(students);
   const [colDefs, setColDefs] = useState<ColDef<Student>[]>();
 
+  const deleteUser = async (id: string) => {
+    try {
+      const { data } = await axiosInstance.delete(`/users/${id}`);
+      console.log(data.message);
+      toast.success("Student deleted successfully!");
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     setRowData(students);
   }, [students]);
@@ -75,6 +87,19 @@ const StudentListTable: React.FC<StudentListTableProps> = ({
           const totalClasses = attendanceLinks.length;
           return `${Math.floor((attended / totalClasses) * 100)}%`;
         },
+        flex: 1,
+        filter: true,
+        minWidth: 200,
+      },
+      {
+        headerName: "Action",
+        cellRenderer: (params: any) => (
+          <Trash
+            className="cursor-pointer pt-2"
+            onClick={() => deleteUser(params.data?._id)}
+          />
+        ),
+
         flex: 1,
         filter: true,
         minWidth: 200,

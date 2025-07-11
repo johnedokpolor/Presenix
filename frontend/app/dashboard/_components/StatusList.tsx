@@ -22,20 +22,17 @@ const StatusList: React.FC<Props> = ({
         title="Total Student"
         value={totalStudents.toString()}
       />
-      {(attendanceLinks ?? 0) > 0 && (
-        <div>
-          <Card
-            icon={<TrendingUp />}
-            title="Total % Present"
-            value={Math.ceil(presentPer) + "%"}
-          />
-          <Card
-            icon={<TrendingDown />}
-            title="Total % Absent"
-            value={Math.ceil(absentPer) + "%"}
-          />
-        </div>
-      )}
+
+      <Card
+        icon={<TrendingUp />}
+        title="Total % Present"
+        value={Math.ceil(presentPer) + "%"}
+      />
+      <Card
+        icon={<TrendingDown />}
+        title="Total % Absent"
+        value={Math.ceil(absentPer) + "%"}
+      />
     </div>
   );
 };

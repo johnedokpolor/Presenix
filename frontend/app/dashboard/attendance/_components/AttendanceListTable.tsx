@@ -7,6 +7,7 @@ import moment from "moment";
 import { AllCommunityModule, ModuleRegistry } from "ag-grid-community";
 import { Search, Trash } from "lucide-react";
 import axiosInstance from "@/utils/axiosInstance";
+import { toast } from "sonner";
 
 // Register all Community features
 ModuleRegistry.registerModules([AllCommunityModule]);
@@ -29,6 +30,7 @@ const AttendanceListTable = ({
   });
   const deleteAttendanceLink = async (id: string) => {
     await axiosInstance.delete(`/users/attendancelinks/${id}`);
+    toast.success("Attendance link deleted successfully!");
     getAll();
   };
 
