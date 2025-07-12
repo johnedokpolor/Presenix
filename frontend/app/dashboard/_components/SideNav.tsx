@@ -17,7 +17,14 @@ const SideNav = () => {
     (lastname?.charAt(0)?.toUpperCase() ?? "");
   return (
     <div className="shadow-md md:border w-2/3 md:w-full  h-screen p-5 bg-white">
-      <h1 className="font-bold text-2xl">Presenix</h1>
+      <div className="flex items-center space-x-2 mb-4">
+        <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg flex items-center justify-center">
+          <span className="text-white font-bold text-lg">P</span>
+        </div>
+        <span className="text-xl font-bold bg-gradient-to-r from-purple-600 to-purple-700 bg-clip-text text-transparent">
+          Presenix
+        </span>
+      </div>
       <hr className="my-5" />
       {menuList.map((menu, index) => (
         <Link

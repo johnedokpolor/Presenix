@@ -38,7 +38,7 @@ export default function SigninPage() {
     // If the user stops typing for 1seconds, add the option to the list
     const timer = setTimeout(() => {
       console.log("User stopped typing. Final input:", formData.password);
-      if (formData.password !== "") {
+      if (formData.password.length > 5) {
         submitButton?.current?.click();
       }
     }, 1000);

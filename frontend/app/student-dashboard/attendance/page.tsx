@@ -28,8 +28,6 @@ const Attendance = () => {
   useEffect(() => {
     GetAttendanceLinks();
     MarkAttendance();
-
-    return () => {};
   }, []);
 
   const GetAttendanceLinks = async () => {
@@ -44,13 +42,11 @@ const Attendance = () => {
     setloading(true);
     try {
       const { data } = await axiosInstance.get("/users/mark-attendance");
-
       toast.success("You have been marked present for this class");
       setloading(false);
     } catch (error) {
       console.error(error);
       toast.error("Token expired, marked as absent");
-
       setloading(false);
     }
   };
@@ -59,26 +55,11 @@ const Attendance = () => {
       {loading ? (
         <div className="flex items-center justify-center h-screen">
           <div>
-            <div className="w-20 h-20 border-2 border-black border-t-transparent rounded-full animate-spin mr-2"></div>
             <h2 className="text-lg font-medium mt-3">Marking Attendance...</h2>
           </div>
         </div>
       ) : (
         <div className="pb-5 px-5 pt-2 md:pb-7 md:px-7 md:pt-2">
-          {/* <h2 className="font-bold text-2xl mb-5 flex items-center justify-between">
-        Classes Attended
-        <Button
-          onClick={GenerateAttendanceLink}
-          className="bg-purple-900 cursor-pointer"
-        >
-          {loading ? (
-            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-          ) : (
-            "+ Generate Link"
-          )}
-        </Button>
-      </h2> */}
-
           <AttendanceListTable
             attendanceLinks={classesAttended}
             getAll={GetAttendanceLinks}
