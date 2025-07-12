@@ -58,7 +58,7 @@ const Attendance = () => {
           getAll={GetAttendanceLinks}
         />
       ) : (
-        <div>No Attendance Links</div>
+        <div>No Attendance Links Yet</div>
       )}
     </div>
   );
