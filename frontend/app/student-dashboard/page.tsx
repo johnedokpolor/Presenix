@@ -17,8 +17,8 @@ const Dashboard = () => {
     return () => {};
   }, []);
 
-  const percentage = (user.attendanceNo / attendanceLinks.length) * 100;
-  console.log(user.attendanceNo, attendanceLinks.length);
+  const percentage = (user?.attendanceNo / attendanceLinks.length) * 100;
+  console.log(user?.attendanceNo, attendanceLinks.length);
   console.log(percentage);
 
   const GetAttendanceLinks = async () => {
