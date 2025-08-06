@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
-// import { Toaster } from "react-hot-toast";
 import { Toaster } from "sonner";
-
 import { Outfit } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "./ThemeProvider";
-import { CheckAuthProvider } from "./CheckAuth";
 const outfit = Outfit({
   weight: ["400", "700"], // Specify font weights you want to use
   subsets: ["latin"], // Specify the character subsets to use (optional)
@@ -14,8 +10,8 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   title: "Presenix",
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
+    icon: "favicon.ico",
+    shortcut: "favicon.ico",
   },
   keywords: ["presenix"],
   authors: [
@@ -35,17 +31,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`antialiased ${outfit.className} overflow-x-hidden`}>
         <Toaster />
-
-        <CheckAuthProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
-        </CheckAuthProvider>
+        {children}
       </body>
     </html>
   );

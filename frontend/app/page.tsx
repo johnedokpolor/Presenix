@@ -104,62 +104,62 @@ const PresenixLanding = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 overflow-hidden">
+    <div className="min-h-screen overflow-hidden text-gray-900 bg-white">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+      <nav className="fixed top-0 z-50 w-full border-b border-gray-200 shadow-sm bg-white/80 backdrop-blur-lg">
+        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">P</span>
+              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-r from-purple-500 to-purple-600">
+                <span className="text-lg font-bold text-white">P</span>
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-purple-600 to-purple-700 bg-clip-text text-transparent">
+              <span className="text-xl font-bold text-transparent bg-gradient-to-r from-purple-600 to-purple-700 bg-clip-text">
                 Presenix
               </span>
             </div>
 
-            <div className="hidden md:flex space-x-8">
+            <div className="hidden space-x-8 md:flex">
               <a
                 href="#features"
-                className="text-gray-700 hover:text-purple-600 transition-colors"
+                className="text-gray-700 transition-colors hover:text-purple-600"
               >
                 Features
               </a>
               <a
                 href="#pricing"
-                className="text-gray-700 hover:text-purple-600 transition-colors"
+                className="text-gray-700 transition-colors hover:text-purple-600"
               >
                 Pricing
               </a>
               <a
                 href="#testimonials"
-                className="text-gray-700 hover:text-purple-600 transition-colors"
+                className="text-gray-700 transition-colors hover:text-purple-600"
               >
                 Reviews
               </a>
               <a
                 href="#contact"
-                className="text-gray-700 hover:text-purple-600 transition-colors"
+                className="text-gray-700 transition-colors hover:text-purple-600"
               >
                 Contact
               </a>
             </div>
 
-            <div className="hidden md:flex items-center space-x-4">
+            <div className="items-center hidden space-x-4 md:flex">
               <Link href="/signin">
-                <button className="text-gray-700 hover:text-purple-600 transition-colors">
+                <button className="text-gray-700 transition-colors cursor-pointer hover:text-purple-600">
                   Sign In
                 </button>
               </Link>
               <Link href="/student-signup">
-                <button className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/25">
+                <button className="px-4 py-2 font-medium text-white transition-all duration-300 transform rounded-lg shadow-lg cursor-pointer bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 hover:scale-105 hover:shadow-purple-500/25">
                   Get Started
                 </button>
               </Link>
             </div>
 
             <button
-              className="md:hidden text-gray-700"
+              className="text-gray-700 md:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? (
@@ -173,39 +173,39 @@ const PresenixLanding = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white/95 backdrop-blur-lg border-t border-gray-200">
+          <div className="border-t border-gray-200 md:hidden bg-white/95 backdrop-blur-lg">
             <div className="px-4 py-4 space-y-3">
               <a
                 href="#features"
-                className="block text-gray-700 hover:text-purple-600 transition-colors"
+                className="block text-gray-700 transition-colors hover:text-purple-600"
               >
                 Features
               </a>
               <a
                 href="#pricing"
-                className="block text-gray-700 hover:text-purple-600 transition-colors"
+                className="block text-gray-700 transition-colors hover:text-purple-600"
               >
                 Pricing
               </a>
               <a
                 href="#testimonials"
-                className="block text-gray-700 hover:text-purple-600 transition-colors"
+                className="block text-gray-700 transition-colors hover:text-purple-600"
               >
                 Reviews
               </a>
               <a
                 href="#contact"
-                className="block text-gray-700 hover:text-purple-600 transition-colors"
+                className="block text-gray-700 transition-colors hover:text-purple-600"
               >
                 Contact
               </a>
               <Link href="/signin">
-                <button className="w-full text-left text-gray-700 hover:text-purple-600 transition-colors">
+                <button className="w-full text-left text-gray-700 transition-colors cursor-pointer hover:text-purple-600">
                   Sign In
                 </button>
               </Link>
               <Link href="/student-signup">
-                <button className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300">
+                <button className="w-full px-4 py-2 font-medium text-white transition-all duration-300 rounded-lg cursor-pointer bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800">
                   Get Started
                 </button>
               </Link>
@@ -215,14 +215,14 @@ const PresenixLanding = () => {
       </nav>
 
       {/* Hero Section */}
-      <section id="hero" className="pt-24 pb-20 relative overflow-hidden">
+      <section id="hero" className="relative pt-24 pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-white"></div>
         <div className="absolute top-0 left-0 w-full h-full">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-purple-100/50 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-100/30 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute rounded-full top-20 left-10 w-72 h-72 bg-purple-100/50 blur-3xl animate-pulse"></div>
+          <div className="absolute delay-1000 rounded-full bottom-20 right-10 w-96 h-96 bg-purple-100/30 blur-3xl animate-pulse"></div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="relative z-10 px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="text-center">
             <h1
               className={`text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-600 via-purple-700 to-purple-600 bg-clip-text text-transparent transition-all duration-1000 ${
@@ -243,8 +243,9 @@ const PresenixLanding = () => {
                   : "opacity-0 transform translate-y-10"
               }`}
             >
-              Experience the future of attendance tracking with AI-powered
-              recognition, real-time analytics, and seamless integration
+              Experience the future of attendance tracking with real-time
+              feedback, dynamic charts, and intuitive tables that keep you
+              informed and in control.
             </p>
 
             <div
@@ -254,11 +255,11 @@ const PresenixLanding = () => {
                   : "opacity-0 transform translate-y-10"
               }`}
             >
-              <button className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/25 flex items-center space-x-2">
+              <button className="flex items-center px-8 py-4 space-x-2 text-lg font-semibold text-white transition-all duration-300 transform shadow-lg bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 rounded-xl hover:scale-105 hover:shadow-purple-500/25">
                 <span>Start Free Trial</span>
                 <ArrowRight className="w-5 h-5" />
               </button>
-              <button className="border-2 border-purple-600 text-purple-600 hover:bg-purple-50 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105">
+              <button className="px-8 py-4 text-lg font-semibold text-purple-600 transition-all duration-300 transform border-2 border-purple-600 hover:bg-purple-50 rounded-xl hover:scale-105">
                 Watch Demo
               </button>
             </div>
@@ -268,11 +269,11 @@ const PresenixLanding = () => {
 
       {/* Stats Section */}
       <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-purple-600 mb-2">
+                <div className="mb-2 text-3xl font-bold text-purple-600 md:text-4xl">
                   {stat.number}
                 </div>
                 <div className="text-gray-600">{stat.label}</div>
@@ -283,9 +284,9 @@ const PresenixLanding = () => {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+      <section id="features" className="relative py-20">
+        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="mb-16 text-center">
             <h2
               className={`text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-purple-700 bg-clip-text text-transparent transition-all duration-1000 ${
                 isVisible.features
@@ -306,7 +307,7 @@ const PresenixLanding = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {features.map((feature, index) => (
               <div
                 key={index}
@@ -327,10 +328,10 @@ const PresenixLanding = () => {
                 >
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-semibold mb-3 text-gray-900">
+                <h3 className="mb-3 text-xl font-semibold text-gray-900">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="leading-relaxed text-gray-600">
                   {feature.description}
                 </p>
               </div>
@@ -341,8 +342,8 @@ const PresenixLanding = () => {
 
       {/* Testimonials Section */}
       <section id="testimonials" className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="mb-16 text-center">
             <h2
               className={`text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-purple-700 bg-clip-text text-transparent transition-all duration-1000 ${
                 isVisible.testimonials
@@ -354,7 +355,7 @@ const PresenixLanding = () => {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid gap-8 md:grid-cols-3">
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
@@ -373,14 +374,14 @@ const PresenixLanding = () => {
                     />
                   ))}
                 </div>
-                <p className="text-gray-700 mb-6 italic leading-relaxed">
+                <p className="mb-6 italic leading-relaxed text-gray-700">
                   &quot;{testimonial.quote}&quot;
                 </p>
                 <div>
                   <div className="font-semibold text-gray-900">
                     {testimonial.name}
                   </div>
-                  <div className="text-purple-600 text-sm">
+                  <div className="text-sm text-purple-600">
                     {testimonial.role}
                   </div>
                 </div>
@@ -391,18 +392,18 @@ const PresenixLanding = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 relative overflow-hidden">
+      <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-white"></div>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-purple-700 bg-clip-text text-transparent">
+        <div className="relative z-10 max-w-4xl px-4 mx-auto text-center sm:px-6 lg:px-8">
+          <h2 className="mb-6 text-4xl font-bold text-transparent md:text-5xl bg-gradient-to-r from-purple-600 to-purple-700 bg-clip-text">
             Ready to Transform Your Attendance?
           </h2>
-          <p className="text-xl text-gray-600 mb-8">
+          <p className="mb-8 text-xl text-gray-600">
             Join thousands of organizations already using Presenix to streamline
             their attendance management
           </p>
           <Link href="/lecturer-signup">
-            <button className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-10 py-4 rounded-xl font-semibold text-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/25 flex items-center space-x-2 mx-auto">
+            <button className="flex items-center px-10 py-4 mx-auto space-x-2 text-xl font-semibold text-white transition-all duration-300 transform shadow-lg bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 rounded-xl hover:scale-105 hover:shadow-purple-500/25">
               <span>Get Started Today</span>
               <ArrowRight className="w-6 h-6" />
             </button>
@@ -411,15 +412,15 @@ const PresenixLanding = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-50 border-t border-gray-200 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8">
+      <footer className="py-12 border-t border-gray-200 bg-gray-50">
+        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="grid gap-8 md:grid-cols-4">
             <div>
-              <div className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">P</span>
+              <div className="flex items-center mb-4 space-x-2">
+                <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-r from-purple-500 to-purple-600">
+                  <span className="text-lg font-bold text-white">P</span>
                 </div>
-                <span className="text-xl font-bold bg-gradient-to-r from-purple-600 to-purple-700 bg-clip-text text-transparent">
+                <span className="text-xl font-bold text-transparent bg-gradient-to-r from-purple-600 to-purple-700 bg-clip-text">
                   Presenix
                 </span>
               </div>
@@ -429,62 +430,71 @@ const PresenixLanding = () => {
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4 text-gray-900">Product</h4>
+              <h4 className="mb-4 font-semibold text-gray-900">Product</h4>
               <div className="space-y-2 text-gray-600">
-                <div className="hover:text-purple-600 cursor-pointer transition-colors">
+                <div className="transition-colors cursor-pointer hover:text-purple-600">
                   Features
                 </div>
-                <div className="hover:text-purple-600 cursor-pointer transition-colors">
+                <div className="transition-colors cursor-pointer hover:text-purple-600">
                   Pricing
                 </div>
-                <div className="hover:text-purple-600 cursor-pointer transition-colors">
+                <div className="transition-colors cursor-pointer hover:text-purple-600">
                   API
                 </div>
-                <div className="hover:text-purple-600 cursor-pointer transition-colors">
+                <div className="transition-colors cursor-pointer hover:text-purple-600">
                   Documentation
                 </div>
               </div>
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4 text-gray-900">Company</h4>
+              <h4 className="mb-4 font-semibold text-gray-900">Company</h4>
               <div className="space-y-2 text-gray-600">
-                <div className="hover:text-purple-600 cursor-pointer transition-colors">
+                <div className="transition-colors cursor-pointer hover:text-purple-600">
                   About
                 </div>
-                <div className="hover:text-purple-600 cursor-pointer transition-colors">
+                <div className="transition-colors cursor-pointer hover:text-purple-600">
                   Blog
                 </div>
-                <div className="hover:text-purple-600 cursor-pointer transition-colors">
+                <div className="transition-colors cursor-pointer hover:text-purple-600">
                   Careers
                 </div>
-                <div className="hover:text-purple-600 cursor-pointer transition-colors">
+                <div className="transition-colors cursor-pointer hover:text-purple-600">
                   Contact
                 </div>
               </div>
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4 text-gray-900">Support</h4>
+              <h4 className="mb-4 font-semibold text-gray-900">Support</h4>
               <div className="space-y-2 text-gray-600">
-                <div className="hover:text-purple-600 cursor-pointer transition-colors">
+                <div className="transition-colors cursor-pointer hover:text-purple-600">
                   Help Center
                 </div>
-                <div className="hover:text-purple-600 cursor-pointer transition-colors">
+                <div className="transition-colors cursor-pointer hover:text-purple-600">
                   Privacy Policy
                 </div>
-                <div className="hover:text-purple-600 cursor-pointer transition-colors">
+                <div className="transition-colors cursor-pointer hover:text-purple-600">
                   Terms of Service
                 </div>
-                <div className="hover:text-purple-600 cursor-pointer transition-colors">
+                <div className="transition-colors cursor-pointer hover:text-purple-600">
                   Status
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="border-t border-gray-200 mt-8 pt-8 text-center text-gray-600">
+          <div className="pt-8 mt-8 text-center text-gray-600 border-t border-gray-200">
             <p>&copy; 2025 Presenix. All rights reserved.</p>
+            <p>
+              &copy; 2025 - {new Date().getFullYear()} Made with 💓 by{" "}
+              <Link
+                className="text-purple-600 underline"
+                href="https://wa.me/2348173779198"
+              >
+                GLtech
+              </Link>
+            </p>
           </div>
         </div>
       </footer>

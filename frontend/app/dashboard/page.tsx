@@ -75,8 +75,8 @@ const Dashboard = () => {
   const colors = ["#4C8CF8", "#1FE6D1"];
   return (
     <div className="p-5 md:p-7 ">
-      <p className="font-bold text-2xl">Dashboard</p>
-      <p className="font-medium text-xl">Hello, Lecturer {user.name} </p>
+      <p className="text-2xl font-bold">Dashboard</p>
+      <p className="text-xl font-medium">Hello, Lecturer {user?.name} </p>
 
       <StatusList
         totalStudents={students.length}
@@ -85,9 +85,9 @@ const Dashboard = () => {
         attendanceLinks={attendanceLinks.length}
       />
 
-      <div className="border p-5 rounded-lg">
+      <div className="p-5 border rounded-lg">
         <div className="flex items-center justify-between">
-          <h5 className="font-bold text-xl">Attendance Percentage</h5>
+          <h5 className="text-xl font-bold">Attendance Percentage</h5>
         </div>
         {averageAttendance ? (
           <CustomPieChart data={PieChartData} colors={colors} />
